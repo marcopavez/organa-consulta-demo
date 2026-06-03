@@ -1,0 +1,61 @@
+/* ============================================================================
+   Organa · Design Tokens — shared across desktop + mobile
+   "Papel & Tinta · Guinda": warm cream paper, warm-black ink, a single
+   Chilean-burgundy accent (guinda), Fraunces / Geist / JetBrains Mono,
+   hairlines, radius 0, zero shadows. Light + dark themes.
+   ============================================================================ */
+
+@keyframes organa-live { 0%,49% { opacity: 1; } 50%,100% { opacity: 0.25; } }
+
+/* ---------- design tokens · light ---------- */
+:root {
+  /* paper (warm cream) */
+  --paper:        #F4EFE2;
+  --paper-2:      #ECE6D5;
+  --paper-sunk:   #E5DEC8;
+  --paper-raised: #F8F4E9;
+  /* ink (warm black) */
+  --ink:          #1A1715;
+  --ink-2:        #3A342E;
+  --ink-3:        #6E665A;
+  --ink-4:        #948A78;
+  /* hairlines */
+  --rule-faint:   #DDD3BD;
+  --rule:         #BCAF96;
+  --rule-strong:  #1A1715;
+  /* guinda — the single accent */
+  --guinda:       #7A1F2E;
+  --guinda-2:     #5A1421;
+  --guinda-tint:  #EFD9D5;
+  /* ochre — relevance bars only */
+  --ochre:        #9C7A2E;
+  --ochre-tint:   #E8DAB5;
+  /* type — overridden by next/font variables in layout.tsx */
+  --f-display: var(--font-fraunces, "Fraunces", "Times New Roman", Georgia, serif);
+  --f-ui:      var(--font-geist, "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif);
+  --f-mono:    var(--font-jetbrains-mono, "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace);
+  /* structure */
+  --rule-w: 1px;
+  --masthead-h: 36px;
+  --panel-header-h: 28px;
+}
+
+/* ---------- design tokens · dark · "Carbón & Tiza" ---------- */
+html[data-theme="dark"] {
+  --paper:        #16130E;
+  --paper-2:      #1D1913;
+  --paper-sunk:   #110E0A;
+  --paper-raised: #211C14;
+  --ink:          #ECE4D1;
+  --ink-2:        #C9C0AB;
+  --ink-3:        #948B77;
+  --ink-4:        #6C6555;
+  --rule-faint:   #2A2418;
+  --rule:         #423A2A;
+  --rule-strong:  #ECE4D1;
+  --guinda:       #CC5E6E;
+  --guinda-2:     #E07F8D;
+  --guinda-tint:  #301A1D;
+  --ochre:        #C8A350;
+  --ochre-tint:   #2C2614;
+}

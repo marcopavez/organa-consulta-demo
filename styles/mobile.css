@@ -1,0 +1,161 @@
+/* ============================================================================
+   Organa · Consulta — MOBILE  ·  verbatim port from consulta-mobile.css
+   Tokens are in tokens.css (imported first). Font variables provided by
+   next/font/google via --font-fraunces / --font-geist / --font-jetbrains-mono
+   bound to --f-display / --f-ui / --f-mono in tokens.css.
+   ============================================================================ */
+
+/* ---------- reset / base ---------- */
+* { box-sizing: border-box; }
+.morg, .morg * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; background: var(--paper); transition: background-color .25s ease; }
+
+.morg {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  font-feature-settings: "ss01" on, "cv11" on;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.morg ::selection { background: var(--guinda); color: var(--paper); }
+.morg a { color: inherit; text-decoration: none; }
+
+/* ---------- ticker chip (source-card labels) ---------- */
+.morg .ticker {
+  font-family: var(--f-mono); font-size: 11px; font-weight: 500;
+  padding: 1px 5px; border: 1px solid var(--rule);
+  background: var(--paper-raised); letter-spacing: 0.01em; white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ============================================================
+   App shell — fills the phone screen
+   ============================================================ */
+.m-app {
+  width: 100%; min-height: 100vh; height: 100vh;
+  display: flex; flex-direction: column;
+  background: var(--paper); overflow: hidden; position: relative;
+}
+
+/* ---- faux status bar (Organa-styled) ---- */
+.m-status {
+  flex: 0 0 auto; height: 30px; display: flex; align-items: center; gap: 8px;
+  padding: 0 16px; background: var(--paper); border-bottom: 1px solid var(--rule-faint);
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.02em; color: var(--ink-2);
+}
+.m-status .clock { font-weight: 500; }
+.m-status .sp { flex: 1; }
+.m-status .live {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 9px;
+  color: var(--guinda); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+}
+.m-status .live::before { content: ""; width: 5px; height: 5px; background: var(--guinda); display: inline-block; animation: organa-live 2s steps(2,end) infinite; }
+.m-status .sig { display: inline-flex; gap: 5px; align-items: center; color: var(--ink-2); }
+.m-status .bat { width: 22px; height: 11px; border: 1px solid var(--ink-2); position: relative; display: inline-block; }
+.m-status .bat::after { content: ""; position: absolute; right: -3px; top: 3px; width: 2px; height: 5px; background: var(--ink-2); }
+.m-status .bat > i { position: absolute; left: 1px; top: 1px; bottom: 1px; width: 70%; background: var(--ink-2); }
+
+/* ---- top app bar ---- */
+.m-appbar {
+  flex: 0 0 auto; min-height: 52px; display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px; background: var(--paper); border-bottom: 1px solid var(--rule-strong);
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.m-appbar .ab-title-wrap { flex: 1; min-width: 0; }
+.m-appbar .ab-kicker { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); line-height: 1.2; }
+.m-appbar .ab-title { font-family: var(--f-display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.m-appbar .ab-actions { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+
+/* ---- scroll area ---- */
+.m-scroll { flex: 1 1 auto; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+.m-scroll::-webkit-scrollbar { width: 0; }
+
+/* ============================================================
+   SCREEN STYLES  ·  .mc-*
+   ============================================================ */
+.morg .mc-composer, .morg .mc-src, .morg .mc-ribbon {
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+
+/* DEMO ribbon · doubles as CTA */
+.mc-ribbon { display: flex; align-items: center; gap: 9px; padding: 7px 14px; background: var(--guinda); color: var(--paper); text-decoration: none; }
+html[data-theme="dark"] .mc-ribbon { color: #16130E; }
+.mc-ribbon .demo { font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid currentColor; padding: 1px 6px; flex: 0 0 auto; }
+.mc-ribbon .txt { font-size: 11px; line-height: 1.3; flex: 1; min-width: 0; }
+.mc-ribbon .txt b { font-weight: 600; }
+.mc-ribbon .arr { font-family: var(--f-mono); font-size: 14px; flex: 0 0 auto; }
+
+/* dark toggle in app bar */
+.mc-toggle { width: 36px; height: 36px; flex: 0 0 36px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--rule); background: var(--paper-raised); color: var(--ink-2); cursor: pointer; }
+.mc-toggle svg { width: 18px; height: 18px; }
+
+/* conversation */
+.mc-turn { padding: 16px 16px 18px; border-bottom: 1px solid var(--rule-faint); }
+.mc-q .who { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.mc-q .txt { font-family: var(--f-display); font-size: 19px; font-weight: 500; line-height: 1.26; letter-spacing: -0.01em; }
+.mc-trace { display: flex; align-items: center; gap: 8px; margin: 12px 0; font-family: var(--f-mono); font-size: 10px; color: var(--ink-3); line-height: 1.4; }
+.mc-trace .dot { width: 5px; height: 5px; background: var(--guinda); flex: 0 0 auto; }
+.mc-trace b { color: var(--ink-2); font-weight: 500; }
+.mc-a .who { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--guinda); margin-bottom: 7px; }
+.mc-a p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.6; color: var(--ink); text-wrap: pretty; }
+.mc-a p:last-child { margin-bottom: 0; }
+.mc-a .lead-in { font-weight: 600; }
+.mc-cref { display: inline-flex; align-items: baseline; gap: 3px; font-family: var(--f-mono); font-size: 11px; color: var(--guinda); border-bottom: 1px solid var(--guinda); padding: 0 1px; white-space: nowrap; }
+.mc-cref::before { content: "§"; }
+.mc-cref[data-kind="jur"]::before { content: "‡"; }
+.mc-cref[data-kind="dt"]::before { content: "†"; }
+
+/* fuentes (collapsible) */
+.mc-fuentes { margin-top: 14px; border: 1px solid var(--rule); }
+.mc-fuentes > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 9px 12px; background: var(--paper-sunk); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.mc-fuentes > summary::-webkit-details-marker { display: none; }
+.mc-fuentes > summary .mk { color: var(--guinda); }
+.mc-fuentes > summary .ct { margin-left: auto; color: var(--ink-3); }
+.mc-fuentes > summary .chev { color: var(--ink-3); transition: transform .15s; }
+.mc-fuentes[open] > summary .chev { transform: rotate(90deg); }
+.mc-src { padding: 10px 12px; border-top: 1px solid var(--rule-faint); }
+.mc-src .s-top { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.mc-src .s-top .ticker { font-size: 9.5px; padding: 1px 5px; }
+.mc-src .s-top .score { margin-left: auto; font-family: var(--f-mono); font-size: 11px; color: var(--ink-2); }
+.mc-src .s-title { font-size: 12.5px; font-weight: 500; line-height: 1.3; margin-bottom: 5px; }
+.mc-src .s-rel { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.mc-src .s-rel .bar { flex: 1; height: 5px; background: var(--ochre-tint); }
+.mc-src .s-rel .bar > i { display: block; height: 100%; background: var(--guinda); }
+.mc-src .s-rel .pct { font-family: var(--f-mono); font-size: 9px; color: var(--ink-3); width: 28px; text-align: right; }
+.mc-src .s-snip { font-size: 11px; line-height: 1.4; color: var(--ink-3); border-left: 2px solid var(--rule); padding-left: 8px; }
+
+/* disclaimer */
+.mc-disc { display: flex; gap: 7px; padding: 11px 16px; background: var(--paper-sunk); font-family: var(--f-mono); font-size: 9.5px; color: var(--ink-4); line-height: 1.5; }
+.mc-disc .mk { color: var(--guinda); flex: 0 0 auto; }
+
+/* suggested follow-ups */
+.mc-suggest { padding: 12px 0 4px; }
+.mc-suggest .lbl { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); padding: 0 16px 8px; }
+.mc-suggest .row { display: flex; gap: 8px; padding: 0 16px 12px; overflow-x: auto; }
+.mc-suggest .row::-webkit-scrollbar { height: 0; }
+.mc-sg { flex: 0 0 auto; font-size: 12px; color: var(--ink-2); border: 1px solid var(--rule); background: var(--paper-raised); padding: 8px 12px; white-space: nowrap; cursor: pointer; }
+.mc-sg .mk { color: var(--guinda); margin-right: 5px; }
+
+/* composer (pinned) */
+.mc-composer { flex: 0 0 auto; border-top: 1px solid var(--rule-strong); background: var(--paper); padding: 10px 14px calc(8px + env(safe-area-inset-bottom)); }
+.mc-inputrow { display: flex; align-items: center; gap: 10px; height: 50px; border: 1px solid var(--ink); background: var(--paper-raised); padding: 0 8px 0 13px; }
+.mc-inputrow .ph { flex: 1; min-width: 0; font-size: 14px; color: var(--ink-4); display: flex; align-items: center; gap: 1px; overflow: hidden; white-space: nowrap; }
+.mc-inputrow .ph .cur { width: 1.5px; height: 18px; background: var(--guinda); display: inline-block; animation: organa-live 1s steps(2) infinite; flex: 0 0 auto; }
+.mc-inputrow .send { width: 40px; height: 40px; flex: 0 0 40px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; }
+.mc-inputrow .send svg { width: 18px; height: 18px; }
+.mc-composer .legalese { display: flex; gap: 7px; padding: 8px 2px 0; font-family: var(--f-mono); font-size: 9.5px; color: var(--ink-4); line-height: 1.4; }
+.mc-composer .legalese .gd { color: var(--guinda); }
+
+/* textarea reset for mobile composer */
+.mc-inputrow textarea {
+  flex: 1; min-width: 0; background: transparent; border: none; outline: none; resize: none;
+  font-size: 14px; font-family: var(--f-ui); color: var(--ink); line-height: 1.35;
+  padding: 0; margin: 0; height: 100%; align-self: center;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+.mc-inputrow textarea::placeholder { color: var(--ink-4); }

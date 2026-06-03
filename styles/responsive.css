@@ -1,0 +1,18 @@
+/* ============================================================================
+   Organa · Responsive breakpoint — dual-DOM strategy
+   Desktop shell (820px+) and mobile shell (<820px) both render server-side;
+   CSS hides the inactive one. This avoids any hydration flash and guarantees
+   DOM fidelity to the respective handoff.
+   ============================================================================ */
+
+/* below 820px: hide desktop, show mobile */
+@media (max-width: 819px) {
+  .organa-desktop-shell { display: none !important; }
+  .organa-mobile-shell  { display: flex !important; flex-direction: column; }
+}
+
+/* 820px and above: show desktop, hide mobile */
+@media (min-width: 820px) {
+  .organa-desktop-shell { display: flex !important; flex-direction: column; }
+  .organa-mobile-shell  { display: none !important; }
+}
