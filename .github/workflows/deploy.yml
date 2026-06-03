@@ -28,9 +28,8 @@ jobs:
       - run: npm run build
       # Pages would otherwise run Jekyll and drop the _next/ folder.
       - run: touch out/.nojekyll
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      # Pages is enabled out-of-band (build_type=workflow) via the API, since the
+      # workflow token can't create the Pages site; no configure-pages step needed.
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
